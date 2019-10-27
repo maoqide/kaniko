@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/GoogleContainerTools/kaniko/pkg/constants"
+	"github.com/dustin/go-humanize"
 )
 
 // WriteCounter counts the number of bytes written to it. It implements to the io.Writer
@@ -30,7 +31,7 @@ func (wc WriteCounter) PrintProgress() {
 	// Clear the line by using a character return to go back to the start and remove
 	// the remaining characters by filling it with spaces
 	fmt.Printf("\r%s", strings.Repeat(" ", 35))
-	fmt.Printf("\rDownloading... %d complete", wc.Total)
+	fmt.Printf("\rDownloading... %s complete", humanize.Bytes(wc.Total))
 }
 
 // DownloadRemoteFile will download a url to a local file. It's efficient because it will
